@@ -29,7 +29,7 @@
 						점심먹고싶다~~~~
 						<br>
 						<br>
-						<a href="">방명록</a>에 글 남기기
+						<a href="/mysite/guest">방명록</a>에 글 남기기
 						<br>
 					</p>
 				</div>

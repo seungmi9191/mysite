@@ -1,60 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="/mysite/assets/css/guestbook.css" rel="stylesheet" type="text/css">
-	<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/mysite/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<title>삭제화면</title>
 </head>
 <body>
 	<div id="container">
-		
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<!-- 로그인 전 -->
-				<li><a href="">로그인</a></li>
-				<li><a href="">회원가입</a></li>
-				
-				<!-- 로그인 후 -->
-				<!-- 
-				<li><a href="">회원정보수정</a></li>
-				<li><a href="">로그아웃</a></li> 
-				<li> 황일영님 안녕하세요^^;</li>
-				-->
-			</ul>
-		</div> <!-- /header -->
-		
-		<div id="navigation">
-			<ul>
-				<li><a href="">황일영</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
-		</div> <!-- /navigation -->
-		
+
+		<!-- header -->
+		<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
+		<!-- /header -->
+
+		<!-- navigation -->
+		<jsp:include page="/WEB-INF/views/includes/navigation.jsp"></jsp:include>
+		<!-- /navigation -->
+
 		<div id="wrapper">
 			<div id="content">
 				<div id="guestbook" class="delete-form">
-					
-					<form method="" action="">
-						
-						<label>비밀번호</label>
-						<input type="password" name="password">
-						<input type="submit" value="확인">
+					<form method="post" action="/mysite/guest?g=delete">
+						<input type='hidden' name="no" value=<%=request.getParameter("no")%>> 
+						<input type='hidden' name="password" value=<%=request.getParameter("password")%>>
+						<table>
+							<tr>
+								<td>비밀번호</td>
+								<td><input type="password" name="pw_input"></td>
+								<td><input type="submit" value="확인"></td>
+							</tr>
+						</table>
 					</form>
-					<a href="">방명록 리스트</a>
-					
+						<a href="./main">메인으로 돌아가기</a>
 				</div>
-			</div><!-- /content -->
-		</div><!-- /wrapper -->
-		
-		<div id="footer">
-			<p>(c)opyright 2015,2016,2017</p>
-		</div> <!-- /footer -->
-		
-	</div> <!-- /container -->
+			</div>
+			<!-- /content -->
+		</div>
+		<!-- /wrapper -->
+
+		<!-- footer -->
+		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
+		<!-- footer -->
+
+	</div>
+	<!-- /container -->
 
 </body>
 </html>

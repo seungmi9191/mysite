@@ -1,6 +1,11 @@
+<%@page import="com.javaex.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	UserVo authUser = (UserVo)session.getAttribute("authUser"); //어떤 자료형인지 안정해줘서 다운캐스팅
+	//주소를 변수 authUser에 담고 주소를 따라가면  그 주소 자리에 (왼쪽)UserVo라는 애가 있음 그 안의 주소값에 있는 내용으로 로그인 파악
+%>
 <html>
 <head>
 	<title>mysite</title>
@@ -10,28 +15,21 @@
 <body>
 	<div id="container">
 		
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<li><a href="">로그인</a><li>
-				<li><a href="">회원가입</a><li>
-				<li><a href="">회원정보수정</a><li>
-				<li><a href="">로그아웃</a><li>
-				<li>님 안녕하세요 ^^;</li>
-			</ul>
-		</div>
-		
-		<div id="navigation">
-			<ul>
-				<li><a href="">황일영</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
-		</div>
+		<!-- header -->
+		<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
+		<!-- /header -->
+
+		<!-- navigation -->
+		<jsp:include page="/WEB-INF/views/includes/navigation.jsp"></jsp:include>
+		<!-- /navigation -->
 		
 		<div id="content">
 			<div id="board">
+				<%
+					if(authUser==null) {
+				%>
 				<form id="search_form" action="" method="post">
+					<input type="hidden" name="" value="">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -44,22 +42,6 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>				
-					<tr>
-						<td>3</td>
-						<td><a href="">세 번째 글입니다.</a></td>
-						<td>황일영</td>
-						<td>3</td>
-						<td>2015-10-11 12:04:20</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td><a href="">두 번째 글입니다.</a></td>
-						<td>정우성</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
 					<tr>
 						<td>1</td>
 						<td><a href="">첫 번째 글입니다.</a></td>
@@ -79,16 +61,59 @@
 						<li>5</li>
 						<li><a href="">▶</a></li>
 					</ul>
-				</div>				
+				</div>	
+					
+				<%			
+				}else {
+				%>
+				
+				<form id="search_form" action="" method="post">
+					<input type="hidden" name="" value="">
+					<input type="text" id="kwd" name="kwd" value="">
+					<input type="submit" value="찾기">
+				</form>
+				<table class="tbl-ex">
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>글쓴이</th>
+						<th>조회수</th>
+						<th>작성일</th>
+						<th>&nbsp;</th>
+					</tr>				
+					<tr>
+						<td>1</td>
+						<td><a href="">첫 번째 글입니다.</a></td>
+						<td>이효리</td>
+						<td>3</td>
+						<td>2015-09-25 07:24:32</td>
+						<td><a href="" class="del">삭제</a></td>
+					</tr>
+				</table>
+				<div class="pager">
+					<ul>
+						<li><a href="">◀</a></li>
+						<li><a href="">1</a></li>
+						<li><a href="">2</a></li>
+						<li class="selected">3</li>
+						<li><a href="">4</a></li>
+						<li>5</li>
+						<li><a href="">▶</a></li>
+					</ul>
+				</div>	
+						
 				<div class="bottom">
 					<a href="" id="new-book">글쓰기</a>
 				</div>				
 			</div>
+			<%
+				}
+			%>
 		</div>
 		
-		<div id="footer">
-			<p>(c)opyright 2015,2016,2017</p>
-		</div> <!-- /footer -->
+		<!-- footer -->
+		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
+		<!-- footer -->
 		
 	</div>
 </body>
