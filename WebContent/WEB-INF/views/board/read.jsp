@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
+<% pageContext.setAttribute( "newLine", "\n" ); %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,11 +14,11 @@
 	<div id="container">
 
 		<!-- header -->
-		<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- /header -->
 
 		<!-- navigation -->
-		<jsp:include page="/WEB-INF/views/includes/navigation.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/navigation.jsp"></c:import>
 		<!-- /navigation -->
 		
 		<div id="content">
@@ -26,28 +29,28 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>제목입니다.</td>
+						<td>${boardVo.title}</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								내용 1입니다.<br>
-								내용 2입니다.<br>
-								내용 3입니다.
+								${fn:replace(boardVo.content, newLine, "<br>")}
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="">글목록</a>
-					<a href="">글수정</a>
+					<a href="/mysite/board">글목록</a>
+					<c:if test="${authUser.no == boardVo.userNo }">
+						<a href="/mysite/board?b=modifyform&no=${boardVo.no}">글수정</a>
+					</c:if>
 				</div>
 			</div>
 		</div>
 
 		<!-- footer -->
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- footer -->
 	</div>
 </body>
